@@ -1,110 +1,106 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React, { Component } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { useTable } from "react-table";
+import BTable from 'react-bootstrap/Table';
 
-function App() {
-  const data = React.useMemo(
-    () => [
-      {
-        subject: "Calculus",
-        section: "B",
-        timings: "9-12",
-        type: "Course",
-      },
-      {
-        subject: "Islamiat",
-        section: "B",
-        timings: "9-12",
-        type: "Course",
-      },
-      {
-        subject: "Pakistan Studies",
-        section: "B",
-        timings: "9-12",
-        type: "Course",
-      },
-    ],
-    []
-  );
+import { useTable } from 'react-table'
+import { makeData } from "./fetch.js";
 
-  const columns = React.useMemo(
-    () => [
+function Table({ columns, data }) {
+  // Use the state and functions returned from useTable to build your UI
+  const { getTableProps, headerGroups, rows, prepareRow } = useTable({
+    columns,
+    data,
+  })
+
+  // Render the UI for your table
+  return (
+    <BTable striped bordered hover size="sm" {...getTableProps()}>
+      <thead>
+        {headerGroups.map(headerGroup => (
+          <tr {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map(column => (
+              <th {...column.getHeaderProps()}>
+                {column.render('Header')}
+              </th>
+            ))}
+          </tr>
+        ))}
+      </thead>
+      <tbody>
+        {rows.map((row, i) => {
+          prepareRow(row)
+          return (
+            <tr {...row.getRowProps()}>
+              {row.cells.map(cell => {
+                return (
+                  <th {...cell.getCellProps()}>
+                    {cell.render('Cell')}
+                  </th>
+                )
+              })}
+            </tr>
+          )
+        })}
+      </tbody>
+    </BTable>
+  )
+}
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    //Initial data from API
+    this.state = {
+      data: [],
+    };
+  }
+
+  componentDidMount() {
+    makeData().then((result) => {
+      this.setState({
+        data: result,
+      });
+    });
+  }
+
+  render() {
+    const columns = [
       {
         Header: "Subject",
-        accessor: "subject", // accessor is the "key" in the data
+        accessor: "name", // accessor is the "key" in the data
       },
       {
         Header: "Section",
         accessor: "section",
       },
       {
-        Header: "Timings",
-        accessor: "timings",
+        Header: "Start",
+        accessor: "start_time",
       },
       {
-        Header: "Type",
-        accessor: "type",
+        Header: "End",
+        accessor: "end_time",
       },
-    ],
-    []
-  );
+      {
+        Header: "Room",
+        accessor: "room",
+      },
+      {
+        Header: "Day",
+        accessor: "day",
+      },
+    ];
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable({ columns, data });
-
-  return (
-    <table {...getTableProps()} style={{ border: "solid 1px blue" }}>
-      <thead>
-        {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
-              <th
-                {...column.getHeaderProps()}
-                style={{
-                  borderBottom: "solid 3px red",
-                  background: "aliceblue",
-                  color: "black",
-                  fontWeight: "bold",
-                }}
-              >
-                {column.render("Header")}
-              </th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row) => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map((cell) => {
-                return (
-                  <td
-                    {...cell.getCellProps()}
-                    style={{
-                      padding: "10px",
-                      border: "solid 1px gray",
-                      background: "papayawhip",
-                    }}
-                  >
-                    {cell.render("Cell")}
-                  </td>
-                );
-              })}
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-  );
+    return (
+       <div>
+      <Table
+        columns={columns}
+        data={this.state.data}
+        />
+        </div>
+    );
+  }
 }
 
-export default App;
+export default  App;
