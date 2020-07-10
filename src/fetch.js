@@ -38,18 +38,3 @@ export async function makeData() {
     console.log(err);
   }
 }
-
- 
-// makeData().then((data) => {
-//   console.log(data);
-//   for (let i of data) {
-//     console.log(i);
-//   }
-// });
-// });
-// listCourses().then((result) => {
-//     for (let i of result.courses)
-//         console.log(i);
-// });
-
-// fetchCourse("Design Pattern (MSP-2A)")
