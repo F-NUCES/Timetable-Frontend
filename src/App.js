@@ -1,77 +1,27 @@
-import React, { Component, useState } from "react";
-import Spinner from "react-bootstrap/Spinner";
+import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-import BTable from "react-bootstrap/Table";
-
-import { useTable, useFilters } from "react-table";
-import { makeData } from "./fetch.js";
-
-function Table({ columns, data }) {
-  // Use the state and functions returned from useTable to build your UI
-  const [filterInput, setFilterInput] = useState("");
-  const { getTableProps, headerGroups, rows, prepareRow, setFilter } = useTable(
-    {
-      columns,
-      data,
-    },
-    useFilters
-  );
-
-  const handleFilterChange = (e) => {
-    const value = e.target.value || undefined;
-    setFilter("name", value);
-    setFilterInput(value);
-  };
-
-  // Render the UI for your table
-  return (
-    <>
-      <input
-        value={filterInput}
-        onChange={handleFilterChange}
-        placeholder={"Search name"}
-      />
-      <BTable striped borderless hover size="sm" {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {rows.map((row, i) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <th {...cell.getCellProps()}>{cell.render("Cell")}</th>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </BTable>
-    </>
-  );
-}
-
+import { generateData } from "./fetch.js";
+import { Table } from "./Table.js";
+import Course from "./course.js";
+import { generateColumns } from "./utils.js";
+import { CourseSelector } from "./selector.js";
 class App extends Component {
   constructor(props) {
     super(props);
-    //Initial data from API
+
     this.state = {
       data: [],
     };
+
+    this.loadData = this.loadData.bind(this);
   }
 
   componentDidMount() {
-    makeData().then((result) => {
+    this.loadData("3");
+  }
+
+  loadData(limit) {
+    generateData(parseInt(limit)).then((result) => {
       this.setState({
         data: result,
       });
@@ -79,36 +29,13 @@ class App extends Component {
   }
 
   render() {
-    const columns = [
-      {
-        Header: "Subject",
-        accessor: "name", // accessor is the "key" in the data
-      },
-      {
-        Header: "Section",
-        accessor: "section",
-      },
-      {
-        Header: "Start",
-        accessor: "start_time",
-      },
-      {
-        Header: "End",
-        accessor: "end_time",
-      },
-      {
-        Header: "Room",
-        accessor: "room",
-      },
-      {
-        Header: "Day",
-        accessor: "day",
-      },
-    ];
+    const columns = generateColumns();
 
     return (
       <div>
-        <Table columns={columns} data={this.state.data} />
+        <Course submit={this.loadData} />
+        <CourseSelector options={this.state.data} />
+        {/* <Table columns={columns} data={this.state.data} />  */}
       </div>
     );
   }

@@ -1,28 +1,28 @@
 const axios = require("axios");
 const server_url = "http://localhost:8000";
 
-export async function listCourses() {
+async function grab(url) {
   try {
-    const resp = await axios.get(`${server_url}/courses`);
+    const resp = await axios.get(url);
     return resp.data;
   } catch (error) {
     console.log(error);
   }
 }
 
-export async function fetchCourse(name) {
-  try {
-    const resp = await axios.get(`${server_url}/course?name=${name}`);
-    return resp.data;
-  } catch (error) {
-    console.log(error);
-  }
+async function listCourses() {
+  return grab(`${server_url}/courses`);
 }
 
-export async function makeData() {
+async function fetchCourse(name) {
+  return grab(`${server_url}/course?name=${name}`);
+}
+
+async function generateData(limit = -1) {
   try {
     const data = [];
     const result = await listCourses();
+    let num = 0;
     for (let i of result.courses) {
       let course_info = await fetchCourse(i);
       if (course_info) {
@@ -31,6 +31,8 @@ export async function makeData() {
             data.push(i);
           }
         }
+        num += 1;
+        if (num >= limit && limit !== -1) break;
       }
     }
     return data;
@@ -38,3 +40,5 @@ export async function makeData() {
     console.log(err);
   }
 }
+
+export { grab, listCourses, fetchCourse, generateData };
