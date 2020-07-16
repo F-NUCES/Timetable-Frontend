@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { generateData } from "./fetch.js";
-import { Table } from "./Table.js";
 import Course from "./course.js";
 import { generateColumns } from "./utils.js";
 import { CourseSelector } from "./selector.js";
+import { LoadCourses } from "./loadCourses.js";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +17,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.loadData("3");
+    // this.loadData();
   }
 
   loadData(limit) {
@@ -33,8 +33,8 @@ class App extends Component {
 
     return (
       <div>
-        <Course submit={this.loadData} />
-        <CourseSelector options={this.state.data} />
+        {/* <Course submit={this.loadData} /> */}
+        <LoadCourses/>
         {/* <Table columns={columns} data={this.state.data} />  */}
       </div>
     );

@@ -15,7 +15,20 @@ async function listCourses() {
 }
 
 async function fetchCourse(name) {
-  return grab(`${server_url}/course?name=${name}`);
+  return grab(`${server_url}/course?name=${encodeURIComponent(name)}`);
+}
+
+async function generateListOfCourses() {
+  try {
+    const output = await listCourses();
+    const result = [];
+    for (let i of output) {
+      result.push(i);
+    }
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 async function generateData(limit = -1) {
@@ -40,5 +53,4 @@ async function generateData(limit = -1) {
     console.log(err);
   }
 }
-
-export { grab, listCourses, fetchCourse, generateData };
+export { grab, listCourses, fetchCourse, generateData, generateListOfCourses };

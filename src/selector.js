@@ -1,25 +1,21 @@
+import { Tooltip, Button } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import "antd/dist/antd.css";
 import makeAnimated from "react-select/animated";
 import React, { Component } from "react";
 import Select from "react-select";
-import { generateData } from "./fetch";
+import { listCourses, generateListOfCourses } from "./fetch";
 
-const filterCourses = (limit) => {
-  const courses = generateData(limit).then((data) => {
+const filterCourses = () => {
+  const courses = generateListOfCourses().then((data) => {
     return data;
   });
   return courses.then((c) => {
-    return c.map((course) => {
-      return { label: course.name, value: course.name };
+    return c.map((course, index) => {
+      return { label: course[index], value: course[index] };
     });
   });
 };
-
-const promiseOptions = () =>
-  new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(filterCourses());
-    }, 1000);
-  });
 
 class CourseSelector extends Component {
   constructor(props) {
@@ -27,28 +23,49 @@ class CourseSelector extends Component {
     this.state = {
       data: [],
     };
-    this.loadData = this.loadData.bind(this);
-  }
-  componentDidMount() {
-    this.loadData("5");
+
+    this.loadCoursesList = this.loadCoursesList.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  loadData(limit) {
-    filterCourses().then((options) => {
-      this.setState({ data: options });
+  componentDidMount() {
+    this.loadCoursesList();
+  }
+
+  loadCoursesList() {
+    filterCourses().then((courses) => {
+      this.setState({ data: courses });
     });
+  }
+
+  handleChange(selectedValue) {
+    this.props.selectCourses(selectedValue);
   }
 
   render() {
     const animatedComponents = makeAnimated();
 
     return (
-      <Select
-        closeMenuOnSelect={false}
-        components={animatedComponents}
-        isMulti
-        options={this.state.data}
-      />
+      <>
+        <Select
+          closeMenuOnSelect={false}
+          components={animatedComponents}
+          isMulti
+          options={this.state.data}
+          onChange={this.handleChange}
+          onMenuClose={this.props.loadCoursesInfo}
+        />
+        {/* <Tooltip title="search">
+            <Button
+              style={{ "textAlign": "center", display: "block" }}
+              type="primary"
+              htmlType="submit"
+              shape="circle"
+              icon={<SearchOutlined />}
+              // onClick={(e) => this.handleChange()}
+            />
+          </Tooltip> */}
+      </>
     );
   }
 }
