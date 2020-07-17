@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-import { generateData } from "./fetch.js";
-import Course from "./course.js";
-import { generateColumns } from "./utils.js";
-import { CourseSelector } from "./selector.js";
-import { LoadCourses } from "./loadCourses.js";
+import { generateData } from "../api/fetch.js";
+import { LoadCourses } from "../components/loadCourses.js";
 
 class App extends Component {
   constructor(props) {
@@ -29,7 +26,6 @@ class App extends Component {
   }
 
   render() {
-    const columns = generateColumns();
 
     return (
       <div>

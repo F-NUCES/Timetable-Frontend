@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { fetchCourse, generateData } from "./fetch.js";
+import { fetchCourse, generateData } from "../api/fetch.js";
 import { Table } from "./Table.js";
 
-import Course from "./course.js";
-import { generateColumns } from "./utils.js";
+import { generateColumns } from "../helpers/utils.js";
 import { CourseSelector } from "./selector.js";
 
 class LoadCourses extends Component {

@@ -4,7 +4,7 @@ import "antd/dist/antd.css";
 import makeAnimated from "react-select/animated";
 import React, { Component } from "react";
 import Select from "react-select";
-import { listCourses, generateListOfCourses } from "./fetch";
+import { listCourses, generateListOfCourses } from "../api/fetch";
 
 const filterCourses = () => {
   const courses = generateListOfCourses().then((data) => {
