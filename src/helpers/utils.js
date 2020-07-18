@@ -27,4 +27,23 @@ function generateColumns() {
   ];
 }
 
-export { generateColumns };
+function sort_by_sections(data) {
+  let sections = new Set();
+
+  data.map((d) => {
+    sections.add(d.section);
+  });
+
+  sections = [...sections];
+
+  const info = {};
+
+  sections.map((section) => {
+    info[section] = data.filter((d) => {
+      return d.section === section;
+    });
+  });
+  return info;
+}
+
+export { generateColumns, sort_by_sections };

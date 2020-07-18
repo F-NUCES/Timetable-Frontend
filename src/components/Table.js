@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useTable, useFilters } from "react-table";
 import BTable from "react-bootstrap/Table";
 import styled from "styled-components";
@@ -7,14 +7,18 @@ import styled from "styled-components";
 const Styles = styled.div`
   padding: 1rem;
   table {
+    table-layout: auto;
+    width: 100%;
     border-spacing: 0;
-    border: 1px solid black;
+    border: 2px solid black;
+    
     tr {
       :last-child {
         td {
           border-bottom: 0;
         }
       }
+      :hover {background-color: #f5f5f5;}
     }
     th,
     td {
@@ -30,32 +34,13 @@ const Styles = styled.div`
 `;
 
 export function Table({ columns, data }) {
-  // Use the state and functions returned from useTable to build your UI
-  // const [columns, setColumns] = useState("");
-  const { getTableProps, headerGroups, rows, prepareRow } = useTable(
-    {
-      columns,
-      data,
-    },
-    useFilters
-  );
+  const { getTableProps, headerGroups, rows, prepareRow } = useTable({
+    columns,
+    data,
+  });
 
-  // setColumns(column);
-  // setData(courses_info);
-  // console.log(this.state.data);
-
-  // const handleFilterChange = (e) => {
-  //   const value = e.target.value || undefined;
-  //   setFilter("name", value); // filter accessor
-  //   setFilterInput(value);
-  // };
   return (
     <>
-      {/* <input
-        value={filterInput}
-        onChange={handleFilterChange}
-        placeholder={"Search name"}
-      /> */}
       <Styles>
         <BTable striped borderless hover size="sm" {...getTableProps()}>
           <thead>

@@ -29,6 +29,8 @@ class App extends Component {
 
     return (
       <div>
+      <title>NUCES-Timetable</title>
+        
         {/* <Course submit={this.loadData} /> */}
         <LoadCourses/>
         {/* <Table columns={columns} data={this.state.data} />  */}

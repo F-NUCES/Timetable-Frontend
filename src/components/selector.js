@@ -10,6 +10,7 @@ const filterCourses = () => {
   const courses = generateListOfCourses().then((data) => {
     return data;
   });
+
   return courses.then((c) => {
     return c.map((course, index) => {
       return { label: course[index], value: course[index] };
