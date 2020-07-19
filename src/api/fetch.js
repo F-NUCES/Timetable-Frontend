@@ -1,5 +1,5 @@
 const axios = require("axios");
-const server_url = "http://localhost:8000";
+const server_url = "http://timetable.mrafay.me:5000";
 const encode = encodeURIComponent;
 
 async function grab(url) {
