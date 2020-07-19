@@ -19,7 +19,7 @@ const Styles = styled.div`
         }
       }
       :hover {
-        background-color: #f5f5f5;
+        background-color: #002424;
       }
     }
     th, 

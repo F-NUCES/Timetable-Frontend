@@ -40,16 +40,23 @@ class CourseSelection extends Component {
     const animatedComponents = makeAnimated();
 
     return (
-      <>
-        <Select
-          closeMenuOnSelect={false}
-          components={animatedComponents}
-          isMulti
-          options={this.state.data}
-          onChange={this.handleChange}
-          onMenuClose={this.props.loadCoursesInfo}
-        />
-      </>
+      <Select
+        closeMenuOnSelect={false}
+        components={animatedComponents}
+        isMulti
+        options={this.state.data}
+        onChange={this.handleChange}
+        onMenuClose={this.props.loadCoursesInfo}
+        theme={(theme) => ({
+          ...theme,
+          borderRadius: 0,
+          colors: {
+            ...theme.colors,
+            primary25: "#002424",
+            primary: "black",
+          },
+        })}
+      />
     );
   }
 }

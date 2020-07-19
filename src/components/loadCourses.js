@@ -8,13 +8,19 @@ import styled from "styled-components";
 
 const Styles = styled.div`
   .header {
-    padding: 60px;
+    padding: 30px;
     text-align: center;
-    background: #659dbd;
-    color: black;
-    font-size: 20px;
+    background: #001229;
+    color: cyan; 
+    font-weight: bold; 
+    font-size: 12px;
+    font-family: Arial, Tahoma, Verdana, Helvetica;
   }
 `;
+
+
+
+
 
 class TimetableInformation extends Component {
   constructor(props) {
