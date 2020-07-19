@@ -1,22 +1,22 @@
 import React, { Component } from "react";
-import { fetchCourse, generateData } from "../api/fetch.js";
+import { fetchCourse } from "../api/fetch.js";
 import { Table } from "./Table.js";
 
 import { generateColumns, sort_by_sections } from "../helpers/utils.js";
-import { CourseSelector } from "./selector.js";
+import { CourseSelection } from "./selector.js";
 import styled from "styled-components";
 
 const Styles = styled.div`
   .header {
     padding: 60px;
     text-align: center;
-    background: #1abc9c;
+    background: #659dbd;
     color: black;
     font-size: 20px;
   }
 `;
 
-class LoadCourses extends Component {
+class TimetableInformation extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -45,8 +45,7 @@ class LoadCourses extends Component {
         });
       }
       this.setState({ flag: 1 });
-    }
-    else { 
+    } else {
       this.setState({ flag: 0 });
     }
   }
@@ -56,25 +55,7 @@ class LoadCourses extends Component {
       selected_courses: courses,
     });
   }
-  getTrPropsType(state, rowInfo) {
-    if (rowInfo && rowInfo.row) {
-      console.log(rowInfo);
-      return {
-        onClick: (e) => {
-          this.setState({
-            selected: rowInfo.index,
-          });
-        },
-        style: {
-          background:
-            rowInfo.index === this.state.selected ? "#00afec" : "white",
-          color: rowInfo.index === this.state.selected ? "white" : "black",
-        },
-      };
-    } else {
-      return {};
-    }
-  }
+
   render() {
     const columns = generateColumns();
 
@@ -82,7 +63,7 @@ class LoadCourses extends Component {
       <Styles>
         <div className="header">
           <h1 style={{ color: "black" }}>Timetable Selection Menu</h1>
-          <CourseSelector
+          <CourseSelection
             selectCourses={this.updateSelectedCourses}
             loadCoursesInfo={this.loadCoursesInfo}
           />
@@ -91,14 +72,11 @@ class LoadCourses extends Component {
             ? Object.keys(this.state.courses_by_section).map((section, i) => {
                 return (
                   <>
-                    <h3>
-                      <b style={{ color: "blue" }}>{section}:</b>
-                    </h3>
+                    <h3>{section}:</h3>
                     <Table
                       key={i}
                       columns={columns}
                       data={this.state.courses_by_section[section]}
-                      getTrProps={this.getTrPropsType}
                     />
                   </>
                 );
@@ -110,4 +88,4 @@ class LoadCourses extends Component {
   }
 }
 
-export { LoadCourses };
+export { TimetableInformation };

@@ -11,16 +11,18 @@ const Styles = styled.div`
     width: 100%;
     border-spacing: 0;
     border: 2px solid black;
-    
+
     tr {
       :last-child {
         td {
           border-bottom: 0;
         }
       }
-      :hover {background-color: #f5f5f5;}
+      :hover {
+        background-color: #f5f5f5;
+      }
     }
-    th,
+    th, 
     td {
       margin: 0;
       padding: 0.5rem;
@@ -40,36 +42,32 @@ export function Table({ columns, data }) {
   });
 
   return (
-    <>
-      <Styles>
-        <BTable striped borderless hover size="sm" {...getTableProps()}>
-          <thead>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th {...column.getHeaderProps()}>
-                    {column.render("Header")}
-                  </th>
-                ))}
+    <Styles>
+      <BTable striped borderless hover size="sm" {...getTableProps()}>
+        <thead>
+          {headerGroups.map((headerGroup) => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody>
+          {rows.map((row, i) => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell) => {
+                  return (
+                    <th {...cell.getCellProps()}>{cell.render("Cell")}</th>
+                  );
+                })}
               </tr>
-            ))}
-          </thead>
-          <tbody>
-            {rows.map((row, i) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <th {...cell.getCellProps()}>{cell.render("Cell")}</th>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </BTable>
-      </Styles>
-    </>
+            );
+          })}
+        </tbody>
+      </BTable>
+    </Styles>
   );
 }

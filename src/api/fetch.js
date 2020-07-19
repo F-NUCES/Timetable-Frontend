@@ -1,5 +1,6 @@
 const axios = require("axios");
 const server_url = "http://localhost:8000";
+const encode = encodeURIComponent;
 
 async function grab(url) {
   try {
@@ -15,7 +16,7 @@ async function listCourses() {
 }
 
 async function fetchCourse(name) {
-  return grab(`${server_url}/course?name=${encodeURIComponent(name)}`);
+  return grab(`${server_url}/course?name=${encode(name)}`);
 }
 
 async function generateListOfCourses() {
@@ -31,26 +32,4 @@ async function generateListOfCourses() {
   }
 }
 
-async function generateData(limit = -1) {
-  try {
-    const data = [];
-    const result = await listCourses();
-    let num = 0;
-    for (let i of result.courses) {
-      let course_info = await fetchCourse(i);
-      if (course_info) {
-        for (let i of course_info) {
-          if (i) {
-            data.push(i);
-          }
-        }
-        num += 1;
-        if (num >= limit && limit !== -1) break;
-      }
-    }
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
-}
-export { grab, listCourses, fetchCourse, generateData, generateListOfCourses };
+export { grab, listCourses, fetchCourse, generateListOfCourses };
