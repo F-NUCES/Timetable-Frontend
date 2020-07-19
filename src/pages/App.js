@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { TimetableInformation } from "../components/loadCourses.js";
 
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -8,10 +9,10 @@ class App extends Component {
 
   render() {
     return (
-      <div className="app">
+      <>
         <title>NUCES-Timetable</title>
         <TimetableInformation />
-      </div>
+      </>
     );
   }
 }

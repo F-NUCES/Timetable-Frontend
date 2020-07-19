@@ -4,10 +4,10 @@ function generateColumns() {
       Header: "Subject",
       accessor: "name", // accessor is the "key" in the data
     },
-    {
-      Header: "Section",
-      accessor: "section",
-    },
+    // {
+    //   Header: "Section",
+    //   accessor: "section",
+    // },
     {
       Header: "Start",
       accessor: "start_time",

@@ -49,11 +49,9 @@ class CourseSelection extends Component {
         onMenuClose={this.props.loadCoursesInfo}
         theme={(theme) => ({
           ...theme,
-          borderRadius: 0,
+          borderRadius: 30,
           colors: {
             ...theme.colors,
-            primary25: "#002424",
-            primary: "black",
           },
         })}
       />

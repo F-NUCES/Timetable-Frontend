@@ -11,16 +11,22 @@ const Styles = styled.div`
     padding: 30px;
     text-align: center;
     background: #001229;
-    color: cyan; 
-    font-weight: bold; 
-    font-size: 12px;
+    color: cyan;
+    font-weight: bold;
+    font-size: 14px;
+    font-family: Arial, Tahoma, Verdana, Helvetica;
+  }
+
+  .courseMenu {
+    padding: 30px;
+    text-align: center;
+    background: #001229;
+    color: #002424;
+    font-weight: bold;
+    font-size: 14px;
     font-family: Arial, Tahoma, Verdana, Helvetica;
   }
 `;
-
-
-
-
 
 class TimetableInformation extends Component {
   constructor(props) {
@@ -67,18 +73,20 @@ class TimetableInformation extends Component {
 
     return (
       <Styles>
-        <div className="header">
-          <h1 style={{ color: "black" }}>Timetable Selection Menu</h1>
+        <div className="courseMenu">
+          <h1 style={{ color: "white" }}>Timetable Selection Menu</h1>
           <CourseSelection
             selectCourses={this.updateSelectedCourses}
             loadCoursesInfo={this.loadCoursesInfo}
           />
+        </div>
 
+        <div className="header">
           {this.state.flag
             ? Object.keys(this.state.courses_by_section).map((section, i) => {
                 return (
                   <>
-                    <h3>{section}:</h3>
+                    <h2 style={{ color: "white" }}>{section}:</h2>
                     <Table
                       key={i}
                       columns={columns}

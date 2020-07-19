@@ -15,14 +15,14 @@ const Styles = styled.div`
     tr {
       :last-child {
         td {
-          border-bottom: 0;
+          border-bottom:0;
         }
       }
       :hover {
         background-color: #002424;
       }
     }
-    th, 
+    th,
     td {
       margin: 0;
       padding: 0.5rem;
