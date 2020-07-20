@@ -11,7 +11,7 @@ class App extends Component {
   render() {
     return (
       <>
-        <title>NUCES-Timetable v{TIMETABLE_VERSION}</title>
+        <title>NUCES-Timetable</title>
         <TimetableInformation />
       </>
     );

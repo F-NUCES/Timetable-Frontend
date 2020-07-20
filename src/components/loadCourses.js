@@ -4,6 +4,7 @@ import { Table } from "./Table.js";
 
 import { generateColumns, sort_by_sections } from "../helpers/utils.js";
 import { CourseSelection } from "./selector.js";
+import { TIMETABLE_VERSION } from "../timetable_config.js";
 import styled from "styled-components";
 
 const Styles = styled.div`
@@ -74,7 +75,7 @@ class TimetableInformation extends Component {
     return (
       <Styles>
         <div className="courseMenu">
-          <h1 style={{ color: "white" }}>Timetable Selection Menu</h1>
+          <h1 style={{ color: "white" }}>Timetable {TIMETABLE_VERSION} Selection Menu</h1>
           <CourseSelection
             selectCourses={this.updateSelectedCourses}
             loadCoursesInfo={this.loadCoursesInfo}
