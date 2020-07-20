@@ -24,6 +24,10 @@ function generateColumns() {
       Header: "Day",
       accessor: "day",
     },
+    {
+      Header: "Semester",
+      accessor: 'semester'
+    }
   ];
 }
 
