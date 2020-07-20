@@ -1,0 +1,3 @@
+const TIMETABLE_VERSION = "2.1";
+
+export { TIMETABLE_VERSION };
