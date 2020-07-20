@@ -13,11 +13,11 @@ class App extends Component {
 
   render() {
     return (
-      <Layout>
+      <Layout style={{ minHeight: "100vh" }}>
         <Header className="header">
           {" "}
           <div className="logo" />
-          <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]}>
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={["2"]}>
             <Menu.Item key="1">Home</Menu.Item>
             <Menu.Item key="2">Timetable</Menu.Item>
             <Menu.Item key="3">Offered Courses</Menu.Item>
@@ -26,9 +26,14 @@ class App extends Component {
         <Content style={{ padding: "0 50px" }}>
           <Layout
             className="site-layout-background"
-            style={{ padding: "24px 0" }}
+            style={{ padding: "24px 0", minHeight: 360 }}
           >
-            <Sider className="site-layout-background" width={200}>
+            <Sider
+              breakpoint="lg"
+              collapsedWidth="0"
+              className="site-layout-background"
+              width={200}
+            >
               <Menu
                 mode="inline"
                 defaultSelectedKeys={["1"]}
@@ -42,7 +47,7 @@ class App extends Component {
                 </SubMenu>
               </Menu>
             </Sider>
-            <Content style={{ padding: "0 24px", minHeight: 480 }}>
+            <Content style={{ padding: "0 24px", minHeight: 360 }}>
               <TimetableInformation />
             </Content>
           </Layout>
