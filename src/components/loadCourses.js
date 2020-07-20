@@ -9,20 +9,21 @@ import styled from "styled-components";
 
 const Styles = styled.div`
   .header {
-    padding: 30px;
+    padding: 20px;
     text-align: center;
-    background: #001229;
+    background: #001529;
     color: cyan;
     font-weight: bold;
     font-size: 14px;
     font-family: Arial, Tahoma, Verdana, Helvetica;
   }
+  img,
 
   .courseMenu {
-    padding: 30px;
+    padding: 10px;
     text-align: center;
-    background: #001229;
-    color: #002424;
+    background: #fff;
+    color: #001529;
     font-weight: bold;
     font-size: 14px;
     font-family: Arial, Tahoma, Verdana, Helvetica;
@@ -75,7 +76,20 @@ class TimetableInformation extends Component {
     return (
       <Styles>
         <div className="courseMenu">
-          <h1 style={{ color: "white" }}>Timetable {TIMETABLE_VERSION} Selection Menu</h1>
+          <img
+            src="https://user-images.githubusercontent.com/20343475/87937867-f878ad80-caae-11ea-9649-ada173228a5c.png"
+            style={{
+              width: "128px",
+              height: "128px",
+              opacity: "1.0",
+              float: "center",
+              margin_left: "auto",
+              margin_right: "auto",
+            }}
+          ></img>
+          <h1 style={{ color: "black" }}>
+            <b>Timetable v{TIMETABLE_VERSION} Selection Menu</b>
+          </h1>
           <CourseSelection
             selectCourses={this.updateSelectedCourses}
             loadCoursesInfo={this.loadCoursesInfo}

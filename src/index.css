@@ -1,7 +1,7 @@
 
 body {
   /* margin: 0; */
-  background: #001229;
+  background: #fff;
   font-family: Arial, Tahoma, Verdana, Helvetica;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -9,4 +9,20 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+@-ms-viewport{
+  width: device-width;
+}
+
+#components-layout-demo-top-side .logo {
+  width: 120px;
+  height: 31px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px 28px 16px 0;
+  float: left;
+}
+
+.site-layout-background {
+  background: #fff;
 }
