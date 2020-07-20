@@ -104,7 +104,7 @@ class TimetableInformation extends Component {
                     key={i}
                     columns={columns}
                     data={this.state.courses_by_section[section]}
-                  />
+                    />
                 </div>
               );
             })

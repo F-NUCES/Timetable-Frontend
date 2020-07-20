@@ -15,7 +15,7 @@ const Styles = styled.div`
     tr {
       :last-child {
         td {
-          border-bottom:0;
+          border-bottom: 0;
         }
       }
       :hover {
@@ -42,7 +42,11 @@ export function Table({ columns, data }) {
   });
 
   return (
-    <Styles>
+    <Styles
+      style={{
+        overflowX: "auto",
+      }}
+    >
       <BTable striped borderless hover size="sm" {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
