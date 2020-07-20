@@ -1,3 +1,5 @@
+import moment from "moment";
+
 function generateColumns() {
   return [
     {
@@ -26,9 +28,22 @@ function generateColumns() {
     },
     {
       Header: "Semester",
-      accessor: 'semester'
-    }
+      accessor: "semester",
+    },
   ];
+}
+
+function compare(a, b) {
+  const a_time = moment(a.start_time, "h:mm a"),
+    b_time = moment(b.start_time, "h:mm a");
+
+  if (a_time < b_time) {
+    return -1;
+  }
+  if (a_time > b_time) {
+    return 1;
+  }
+  return 0;
 }
 
 function sort_by_sections(data) {
@@ -47,6 +62,9 @@ function sort_by_sections(data) {
       return d.section === section;
     });
   });
+
+  for (let i of Object.keys(info)) info[i].sort(compare);
+
   return info;
 }
 
