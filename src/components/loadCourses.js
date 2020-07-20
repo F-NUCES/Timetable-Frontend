@@ -18,7 +18,6 @@ const Styles = styled.div`
     font-family: Arial, Tahoma, Verdana, Helvetica;
   }
   img,
-
   .courseMenu {
     padding: 10px;
     text-align: center;
@@ -96,22 +95,20 @@ class TimetableInformation extends Component {
           />
         </div>
 
-        <div className="header">
-          {this.state.flag
-            ? Object.keys(this.state.courses_by_section).map((section, i) => {
-                return (
-                  <>
-                    <h2 style={{ color: "white" }}>{section}:</h2>
-                    <Table
-                      key={i}
-                      columns={columns}
-                      data={this.state.courses_by_section[section]}
-                    />
-                  </>
-                );
-              })
-            : null}
-        </div>
+        {this.state.flag
+          ? Object.keys(this.state.courses_by_section).map((section, i) => {
+              return (
+                <div className="header">
+                  <h2 style={{ color: "white" }}>{section}:</h2>
+                  <Table
+                    key={i}
+                    columns={columns}
+                    data={this.state.courses_by_section[section]}
+                  />
+                </div>
+              );
+            })
+          : null}
       </Styles>
     );
   }
